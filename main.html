@@ -1,0 +1,52 @@
+<div data-role="page" id="page_main"  ng-controller="mainCtrl" ng-swipe-right="toggle_right('index.html')">
+	
+	<div data-role="panel" id="panel" data-display="overlay">
+		<ul data-role="listview" data-swipe-close="true">
+			<li><a ng-click="li_ms('display')" data-rel="close">HOME</a></li>
+			<li><a ng-click="li_ms('jo_html5')" data-rel="close">HTML5</a></li>
+    		<li><a ng-click="li_ms('jo_css3')" data-rel="close">CSS</a></li>
+   			<li><a ng-click="li_ms('jo_php')" data-rel="close">PHP</a></li>
+    		<li><a ng-click="li_ms('jo_ajax')" data-rel="close">AJAX</a></li>
+    		<li><a ng-click="li_ms('jo_javascript')" data-rel="close">JavaScript</a></li>
+    		<li><a ng-click="li_ms('jo_jquery')" data-rel="close">jQuery</a></li>
+    		<li><a ng-click="li_ms('jo_xml')" data-rel="close">XML</a></li>
+    		<li><a ng-click="li_ms('jo_aspnet')" data-rel="close">ASP.Net</a></li>
+		</ul>
+	</div>
+	
+	<div data-role="header" data-position="fixed">
+		
+		<a href="#panel" class="ui-btn">分类查询</a>
+        <h2>面试宝典</h2>
+        <a class="jqm-navmenu-link ui-nodisc-icon ui-alt-icon  ui-btn ui-icon-bullets ui-btn-icon-notext ui-corner-all" data-role="button"></a>
+		
+	</div>
+	
+	<div data-role="content">
+		
+		<div id ="home" style="display:block">
+			<p><a href="#panel" class="ui-btn">查看题型</a></p>
+			<p><a href="entering.html" class="ui-btn">题目录入</a></p>
+		</div>
+		
+		<div id="listview_div" style="display: none;">
+		    <input class="search_frame" ng-model="kw" type="search" placeholder="搜索面试题目" />
+	        <ul data-role="listview" class="listview">
+	            <li ng-repeat="list in object">
+	                <a href="detail.html" ng-click="test(list.ID,list.Title)">
+	                    <b class="title">{{list.Title}}</b>
+	                    <span class="reading">阅读：{{list.Reading}}&nbsp;&nbsp;喜欢：{{list.Favorite}}&nbsp;&nbsp;评论：{{list.comm_num}}</span>
+	                </a>
+	            </li>
+	        </ul>
+			<button ng-show="hasMore" ng-click="loadMore()" data-role="button">加载更多</button>
+        	<span ng-hide="hasMore" class="ui-corner-all alert">已经没有更多数据可加载了</span>
+      </div>
+		
+	</div>
+	
+	<div data-role="footer" data-position="fixed">
+		
+	</div>
+
+</div>

@@ -1,0 +1,64 @@
+<div data-role="page" id="page_detail" ng-controller="detailCtrl" ng-swipe-right="toggle_right('main.html')">
+
+	<div data-role="header" data-position="fixed">
+		
+		<a href="#" class="ui-btn ui-icon-back ui-btn-icon-notext" data-rel="back"></a>
+        <h2>面试宝典</h2>
+        <a class="jqm-navmenu-link ui-nodisc-icon ui-alt-icon  ui-btn ui-icon-bullets ui-btn-icon-notext ui-corner-all" data-role="button"></a>
+		
+	</div>
+    <div data-role="content">
+        <div class="ui-corner-all custom-corners">
+            <div class="ui-bar ui-bar-a">
+                <h3>{{object.Title}}</h3>
+            </div>
+            <div class="ui-body ui-body-a">
+                <h4>解答：<span class="like ui-btn ui-icon-heart ui-btn-icon-left">{{object.Favorite}}</span></h4>
+                <a class="detail_hide" style="cursor: pointer;">显示答案</a>
+                <hr />
+                <div class="detail_detail"><p>{{object.Detailed}}</p><img ng-src="{{object.img_url}}"/></div>
+            </div>
+        </div>
+        <div class="ui-corner-all custom-corners">
+            <div class="ui-bar ui-bar-a">
+                <h3> </h3>
+            </div>
+            <div class="add_comm">
+            	
+            	<textarea name="comment"></textarea>
+            	<button ng-click="addComm(object.Title)">发表评论</button>
+            	
+            </div>
+            <div class="ui-body ui-body-a">
+                <h4>评论：
+                	<select name="order" id="order">
+                		<option selected="selected" value="1">按点赞排序</option>
+                		<option value="2">按时间排序</option>
+                	</select>
+                </h4>
+                <div class="comments1">
+                <div class="comments" ng-repeat="comm in comments | orderBy: ['-(comm_like*1)','time']">
+                	<hr />
+                	<p class="detail_info">网友 {{comm.ip}}{{comm.sys}} | {{comm.browser}}</p>
+                	<p class="detail_comment">{{comm.comment}}<span class="like ui-btn ui-icon-heart ui-btn-icon-left" ng-click="commLike(comm.comment)" ng-model="comm.comm_like">{{comm.comm_like}}</span></p>
+                	<span class="detail_time">{{comm.time|date : "yyyy-MM-dd HH:mm:ss"}}</span><br />
+                </div>
+                </div>
+                <div class="comments2" style="display: none;">
+                <div class="comments" ng-repeat="comm in comments | orderBy: '-time'">
+                	<hr />
+                	<p class="detail_info">网友 {{comm.ip}}{{comm.sys}} | {{comm.browser}}</p>
+                	<p class="detail_comment">{{comm.comment}}<span class="like ui-btn ui-icon-heart ui-btn-icon-left" ng-click="commLike(comm.comment)" ng-model="comm.comm_like">{{comm.comm_like}}</span></p>
+                	<span class="detail_time">{{comm.time|date : "yyyy-MM-dd HH:mm:ss"}}</span><br />
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div data-role="footer" class="ui-footer" data-position="fixed">
+        <div class="ui-grid-a" style="margin: 10px auto;">
+            <a class="ui-btn ui-block-a" ng-click="pre()">上一题</a>
+            <a class="ui-btn ui-block-b" ng-click="next()">下一题</a>
+        </div>
+    </div>
+</div>
